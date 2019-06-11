@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './AddTask.css';
 
 class AddTask extends Component {
 
@@ -50,26 +51,20 @@ class AddTask extends Component {
 
         const maxDate = +this.minDate.slice(0, 4) + 1 + '-12-31';
 
-        const style = {
-            fontSize: 20,
-            marginLeft: 10
-        }
-
         return (
-            <>
-                <div className='Form' style={{ margin: 50 }}>
-                    <input style={style} type='text' value={this.state.text} placeholder='Add your task' onChange={this.inputHandler} />
-                    <label style={{ margin: 20, fontSize: 20 }}>
+            <div className='AddTask'>
+                <div className='Form'>
+                    <input type='text' value={this.state.text} placeholder='Add your task' onChange={this.inputHandler} />
+                    <label>
                         <input type='checkbox' checked={this.state.checked} onChange={this.inputHandler} />
                         Priority
                     </label>
-                    <label style={style}>Must be done until
-                        <input style={style} type='date' value={this.state.date} min={this.minDate} max={maxDate} onChange={this.inputHandler} />
+                    <label>Must be done until
+                        <input type='date' value={this.state.date} min={this.minDate} max={maxDate} onChange={this.inputHandler} />
                     </label>
-                    <button onClick={this.addNewTaskHandler} style={{ margin: 20, fontSize: 20 }}>Add task</button>
+                    <button onClick={this.addNewTaskHandler}>Add task</button>
                 </div>
-                <hr />
-            </>
+            </div>
         );
     }
 }

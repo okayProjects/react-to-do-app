@@ -1,0 +1,68 @@
+.ActiveTask,
+.DoneTask {
+   display: flex;
+   flex-direction: column;
+   background-color: rgba(55, 61, 51, .5);
+   margin: 10px;
+   padding: 20px 0;
+}
+.ActiveTask:nth-of-type(even),
+.DoneTask:nth-of-type(even) {
+   background-color: rgba(132, 134, 130, .5);
+}
+
+.ActiveTask div:first-child,
+.DoneTask div:first-child {
+    display: flex;
+    flex-direction: column;
+}
+.ActiveTask div:first-child span:first-of-type,
+.DoneTask div span:first-of-type {
+    font-size: 22px;
+    color: #fff;
+    letter-spacing: 2px;
+}
+.ActiveTask div:first-child span:last-of-type,
+.DoneTask div span:last-of-type,
+.DoneTask div em {
+    font-size: 18px;
+    color: #fff;
+    padding: 10px 0;
+}
+
+.ActiveTaskButtonsWrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.ActiveTaskButtonsWrapper button,
+.DoneTask button {
+    color: #fff;
+    background-color: transparent;
+    font-size: 14px;
+    padding: 8px 15px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: .5s;
+    margin-top: 20px;
+    letter-spacing: 2px;
+}
+
+.DoneTask button {
+    align-self: center;
+}
+.ActiveTaskButtonsWrapper button:last-child {
+    margin-left: 40px;  
+}
+
+.ActiveTask:nth-of-type(odd) .ActiveTaskButtonsWrapper button:hover {
+    color: rgb(84, 94, 77);
+    background-color: #fff;
+    font-weight: bold;
+}
+.ActiveTask:nth-of-type(even) .ActiveTaskButtonsWrapper button:hover {
+    color: rgb(132, 134, 130);
+    background-color: #fff;
+    font-weight: bold;
+}

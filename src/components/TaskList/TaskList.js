@@ -1,5 +1,6 @@
 import React from 'react';
 import Task from '../Task/Task';
+import './TaskList.css';
 
 const TaskList = (props) => {
 
@@ -36,23 +37,29 @@ const TaskList = (props) => {
         <Task key={task.id}
             task={task}
             delete={props.delete}
-            change={props.change} />
+            change={props.change}
+            showAllTasks={props.showAllTasks} />
     ))
 
+
     return (
-        <>
-            <div>
-                <h1>My TaskList with jobs to be done {activeTasks.length}</h1>
-                {activeTasks.length > 0 ? toDoTasks : <span style={{ fontSize: 20, fontWeight: 'bold' }}>You've got nothing to do</span>}
-            </div>
-            <hr />
-            <div>
-                <h2>Tasks already done {doneTasks.length}</h2>
-                {doneTasks.length > 3 && <span>I am displaying only the last three tasks of all done</span>}
-                {done.splice(0, 3)}
+        <div className='TaskList'>
+            <div className='ToDo'>
+                <h1>Things to be done</h1>
+                <h3>You have {activeTasks.length} things to do. </h3>
+                {activeTasks.length > 0 ? toDoTasks : <span>You've got nothing to do</span>}
             </div>
 
-        </>
+            <div className='Done'>
+                <h1>Tasks already done</h1>
+                <h3>You've managed to accomplish {doneTasks.length} tasks</h3>
+                {doneTasks.length > 3 && <div className='WarningWrapper'>
+                    <span className='Warning'>only last three tasks are being displayed</span>
+                    <button onClick={props.showAllTasks}>Show all tasks</button>
+                </div>}
+                {props.displayTasks ? done : done.splice(0, 3)}
+            </div>
+        </div>
     );
 }
 

@@ -20,7 +20,7 @@ class App extends Component {
       {
         id: 1,
         text: 'a to i tamto',
-        date: '2019-02-15',
+        date: '2019-05-15',
         important: false,
         active: true,
         expiry: null
@@ -28,7 +28,7 @@ class App extends Component {
       {
         id: 2,
         text: 'umyć auto',
-        date: '2019-02-15',
+        date: '2019-04-15',
         important: true,
         active: true,
         expiry: null
@@ -36,7 +36,7 @@ class App extends Component {
       {
         id: 3,
         text: 'pojechać na wczasy',
-        date: '2019-02-15',
+        date: '2019-12-15',
         important: false,
         active: true,
         expiry: null
@@ -44,7 +44,7 @@ class App extends Component {
       {
         id: 4,
         text: 'zagrać w wiedźmina4',
-        date: '2019-02-15',
+        date: '2019-09-15',
         important: false,
         active: true,
         expiry: null
@@ -52,12 +52,13 @@ class App extends Component {
       {
         id: 5,
         text: 'sprzedać buteliki',
-        date: '2019-02-15',
+        date: '2019-07-15',
         important: false,
         active: true,
         expiry: null
       },
-    ]
+    ],
+    showAllTasks: false
   }
 
   deleteTaskHandler = (id) => {
@@ -102,6 +103,19 @@ class App extends Component {
     return true;
   }
 
+  showAllTasks = (e) => {
+
+    if (this.state.showAllTasks) {
+      e.target.textContent = 'Show all tasks';
+    } else {
+      e.target.textContent = 'Show last three tasks';
+    }
+
+    this.setState(prevState => {
+      return { showAllTasks: prevState.showAllTasks = !prevState.showAllTasks };
+    });
+  }
+
 
   render() {
     return (
@@ -109,8 +123,10 @@ class App extends Component {
         <AddTask addTask={this.addTaskHandler} />
         <TaskList
           tasks={this.state.tasks}
+          displayTasks={this.state.showAllTasks}
           delete={this.deleteTaskHandler}
           change={this.changeTaskHandler}
+          showAllTasks={this.showAllTasks}
         />
       </div>
     );

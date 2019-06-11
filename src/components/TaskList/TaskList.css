@@ -1,0 +1,58 @@
+.TaskList {
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+}
+
+.ToDo, .Done {
+    flex-basis: 35%;
+    text-transform: capitalize;
+}
+.ToDo h1, .ToDo h3, .Done h1, .Done h3{
+    color: #fff;
+    font-weight: normal;
+    letter-spacing: 4px;
+    margin: 0;
+    background-color:   rgba(44, 49, 41, .9);
+}
+
+.ToDo h1, .Done h1 {
+    padding-top: 20px;
+}
+
+.ToDo h3, .Done h3 {
+    padding-bottom: 20px;
+}
+
+.Done span.Warning {
+    font-size: 17px;
+    color: #fff;
+}
+
+.WarningWrapper {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(187, 36, 36);
+    padding: 10px 0;
+}
+
+.WarningWrapper button {
+    align-self: center;
+    color: #fff;
+    background-color: transparent;
+    font-size: 14px;
+    padding: 8px 15px;
+    border: 1px solid #000;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: .5s;
+    margin-top: 5px;
+    letter-spacing: 2px;
+    transition: .5s;
+}
+
+.WarningWrapper button:hover {
+    background-color: #fff;
+    color: rgb(187, 36, 36);
+    font-weight: bold;
+}
