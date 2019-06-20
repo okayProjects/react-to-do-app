@@ -1,59 +1,78 @@
 import React from 'react';
 import Task from '../Task/Task';
 import './TaskList.css';
+import Sort from '../Sort/Sort';
+
 
 const TaskList = (props) => {
 
-    const activeTasks = props.tasks.filter(task => task.active);
-    const doneTasks = props.tasks.filter(task => !task.active);
+    const sortOptionsActiveTasks = [
+        {
+            name: 'Task names from A to Z',
+            method: 'fromA',
+        },
+        {
+            name: 'Task names from Z to A',
+            method: 'fromZ'
+        },
+        {
+            name: 'Priority',
+            method: 'priority'
+        },
+    ];
+    const sortOptionsDoneTasks = [
+        {
+            name: 'From the oldest',
+            method: 'fromOldest',
 
-    if (activeTasks.length >= 2) {
-        activeTasks.sort((a, b) => {
-            a = a.text.toLowerCase();
-            b = b.text.toLowerCase()
+        },
+        {
+            name: 'From the latest',
+            method: 'fromLatest'
+        },
+        {
+            name: 'Task names from A to Z',
+            method: 'fromA',
+        },
+        {
+            name: 'Task names from Z to A',
+            method: 'fromZ'
+        }
+    ];
 
-            if (a < b) return -1;
-            if (a > b) return 1;
-            return 0
-        })
-    }
-
-    if (doneTasks.length >= 2) {
-        doneTasks.sort((a, b) => {
-            if (a.expiry > b.expiry) return -1;
-            if (a.expiry < b.expiry) return 1;
-            return 0
-        })
-    }
-
-    const toDoTasks = activeTasks.map(task => (
+    const toDoTasks = props.activeTasks.map(task => (
         <Task key={task.id}
             task={task}
             delete={props.delete}
             change={props.change} />
     ));
 
-    const done = doneTasks.map(task => (
+    const done = props.doneTasks.map(task => (
         <Task key={task.id}
             task={task}
             delete={props.delete}
             change={props.change}
             showAllTasks={props.showAllTasks} />
-    ))
-
+    ));
 
     return (
         <div className='TaskList'>
             <div className='ToDo'>
-                <h1>Things to be done</h1>
-                <h3>You have {activeTasks.length} things to do. </h3>
-                {activeTasks.length > 0 ? toDoTasks : <span>You've got nothing to do</span>}
+                <div className='ToDoHeading'>
+                    <h1>Things to be done</h1>
+                    <h3>You have {props.activeTasks.length} things to do. </h3>
+                    {props.activeTasks.length > 1 && <Sort selectName='ToDo' select={props.select} sortOptions={sortOptionsActiveTasks} />}
+                </div>
+                {props.activeTasks.length > 0 ? toDoTasks : <span className='Encouragement'>You've got nothing to do. Start adding new tasks!</span>}
             </div>
 
             <div className='Done'>
-                <h1>Tasks already done</h1>
-                <h3>You've managed to accomplish {doneTasks.length} tasks</h3>
-                {doneTasks.length > 3 && <div className='WarningWrapper'>
+                <div className='DoneHeading'>
+                    <h1>Tasks already done</h1>
+                    <h3>You've managed to accomplish {props.doneTasks.length} tasks</h3>
+                    {props.doneTasks.length > 1 && <Sort selectName='Done' select={props.select} sortOptions={sortOptionsDoneTasks} />}
+                </div>
+                {props.doneTasks.length > 3 && <div className='WarningWrapper'>
                     <span className='Warning'>only last three tasks are being displayed</span>
                     <button onClick={props.showAllTasks}>Show all tasks</button>
                 </div>}

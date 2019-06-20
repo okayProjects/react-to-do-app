@@ -5,60 +5,12 @@ import TaskList from './components/TaskList/TaskList';
 
 class App extends Component {
 
-  counter = 6;
+  counter = 0;
 
   state = {
-    tasks: [
-      {
-        id: 0,
-        text: 'odpocząć',
-        date: '2019-02-15',
-        important: false,
-        active: true,
-        expiry: null
-      },
-      {
-        id: 1,
-        text: 'a to i tamto',
-        date: '2019-05-15',
-        important: false,
-        active: true,
-        expiry: null
-      },
-      {
-        id: 2,
-        text: 'umyć auto',
-        date: '2019-04-15',
-        important: true,
-        active: true,
-        expiry: null
-      },
-      {
-        id: 3,
-        text: 'pojechać na wczasy',
-        date: '2019-12-15',
-        important: false,
-        active: true,
-        expiry: null
-      },
-      {
-        id: 4,
-        text: 'zagrać w wiedźmina4',
-        date: '2019-09-15',
-        important: false,
-        active: true,
-        expiry: null
-      },
-      {
-        id: 5,
-        text: 'sprzedać buteliki',
-        date: '2019-07-15',
-        important: false,
-        active: true,
-        expiry: null
-      },
-    ],
-    showAllTasks: false
+    activeTasks: [],
+    doneTasks: [],
+    showAllTasks: false,
   }
 
   deleteTaskHandler = (id) => {
@@ -69,20 +21,26 @@ class App extends Component {
     //   return { tasks: prevState.tasks = tasks };
     // });
 
-    let tasks = [...this.state.tasks];
-    tasks = tasks.filter(task => task.id !== id);
-    this.setState({ tasks })
+    let activeTasks = [...this.state.activeTasks];
+    activeTasks = activeTasks.filter(task => task.id !== id);
+    this.setState({ activeTasks })
+    let doneTasks = [...this.state.doneTasks];
+    doneTasks = doneTasks.filter(task => task.id !== id);
+    this.setState({ doneTasks })
   }
 
   changeTaskHandler = (id) => {
-    const tasks = Array.from(this.state.tasks);
-    tasks.forEach(task => {
+    let doneTasks = [...this.state.doneTasks];
+    let activeTasks = Array.from(this.state.activeTasks);
+    activeTasks.forEach(task => {
       if (task.id === id) {
         task.active = false;
         task.expiry = new Date().getTime();
-      }
+        doneTasks.push(task);
+      };
     });
-    this.setState({ tasks });
+    activeTasks = activeTasks.filter(task => task.active);
+    this.setState({ activeTasks, doneTasks });
   }
 
   addTaskHandler = (text, date, important) => {
@@ -95,16 +53,13 @@ class App extends Component {
       expiry: null
     }
 
-    // const tasks = [...this.state.tasks];
-    // tasks.push(task)
     this.setState(prevState => {
-      return { tasks: [...prevState.tasks, task] };
+      return { activeTasks: [...prevState.activeTasks, task] };
     });
     return true;
   }
 
   showAllTasks = (e) => {
-
     if (this.state.showAllTasks) {
       e.target.textContent = 'Show all tasks';
     } else {
@@ -116,17 +71,120 @@ class App extends Component {
     });
   }
 
+  selectHandler = (value, name) => {
+    if (name === 'ToDo') {
+      let activeTasks = [...this.state.activeTasks];
+
+      switch (value) {
+        case 'fromA':
+          activeTasks.sort((a, b) => {
+            a = a.text.toLowerCase();
+            b = b.text.toLowerCase()
+
+            if (a < b) return -1;
+            if (a > b) return 1;
+            return 0
+          });
+          break;
+        case 'fromZ':
+          activeTasks.sort((a, b) => {
+            a = a.text.toLowerCase();
+            b = b.text.toLowerCase()
+
+            if (a > b) return -1;
+            if (a < b) return 1;
+            return 0
+          });
+          break;
+        case 'fromOldest':
+          activeTasks.sort((a, b) => {
+            if (a.expiry > b.expiry) return -1;
+            if (a.expiry < b.expiry) return 1;
+            return 0
+          });
+          break;
+        case 'fromLatest':
+          activeTasks.sort((a, b) => {
+            if (a.expiry < b.expiry) return -1;
+            if (a.expiry > b.expiry) return 1;
+            return 0
+          });
+          break;
+        case 'priority':
+          activeTasks.sort((a, b) => {
+            if (a.important && !b.important) return -1;
+            if (!a.important && b.important) return 1;
+            return 0;
+          })
+          break;
+
+        default: activeTasks = this.state.activeTasks;
+      }
+      this.setState(prevState => {
+        return { activeTasks: prevState.activeTasks = activeTasks };
+      });
+
+    } if (name === 'Done') {
+      let doneTasks = [...this.state.doneTasks];
+
+      switch (value) {
+        case 'fromA':
+          doneTasks.sort((a, b) => {
+            a = a.text.toLowerCase();
+            b = b.text.toLowerCase()
+
+            if (a < b) return -1;
+            if (a > b) return 1;
+            return 0
+          });
+          break;
+        case 'fromZ':
+          doneTasks.sort((a, b) => {
+            a = a.text.toLowerCase();
+            b = b.text.toLowerCase()
+
+            if (a > b) return -1;
+            if (a < b) return 1;
+            return 0
+          });
+          break;
+        case 'fromOldest':
+          doneTasks.sort((a, b) => {
+            if (a.expiry > b.expiry) return -1;
+            if (a.expiry < b.expiry) return 1;
+            return 0
+          });
+          break;
+        case 'fromLatest':
+          doneTasks.sort((a, b) => {
+            if (a.expiry < b.expiry) return -1;
+            if (a.expiry > b.expiry) return 1;
+            return 0
+          });
+          break;
+
+        default: doneTasks = this.state.doneTasks;
+      }
+
+      this.setState(prevState => {
+        return { doneTasks: prevState.tasks = doneTasks };
+      });
+    }
+  }
+
 
   render() {
     return (
       <div className="App">
         <AddTask addTask={this.addTaskHandler} />
         <TaskList
-          tasks={this.state.tasks}
+          activeTasks={this.state.activeTasks}
+          doneTasks={this.state.doneTasks}
           displayTasks={this.state.showAllTasks}
           delete={this.deleteTaskHandler}
           change={this.changeTaskHandler}
           showAllTasks={this.showAllTasks}
+          select={this.selectHandler}
         />
       </div>
     );

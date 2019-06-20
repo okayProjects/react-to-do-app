@@ -1,0 +1,16 @@
+.Sort label {
+    color: #fff;
+    font-size: 16px;
+    text-transform: initial;
+    margin-right: 10px;
+}
+
+.Sort option, .Sort select {
+    font-size: 16px;
+    background-color: rgb(44, 49, 41);
+    color: #fff;
+}
+
+option {
+    color: #fff;
+}

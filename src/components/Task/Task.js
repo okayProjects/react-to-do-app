@@ -20,8 +20,6 @@ const Task = (props) => {
                     <button onClick={() => props.change(id)}>DONE</button>
                     <button onClick={() => props.delete(id)}>DELETE</button>
                 </div>
-
-
             </div>
         );
     } else {

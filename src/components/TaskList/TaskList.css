@@ -1,7 +1,23 @@
+.ToDo span.Encouragement {
+    color: #fff;
+    letter-spacing: 1px;
+    text-transform: initial;
+    font-size: 18px;
+    border: 1px solid rgb(177, 199, 164);
+    padding: 5px 10px;
+    background-color: #2E322B;
+}
+
 .TaskList {
     margin: 0 auto;
     display: flex;
     justify-content: space-around;
+}
+
+.ToDoHeading, .DoneHeading {
+    background-color:rgba(44, 49, 41, .9);
+    border: 2px solid rgb(177, 199, 164);
+    margin-bottom: 15px;
 }
 
 .ToDo, .Done {
@@ -13,7 +29,6 @@
     font-weight: normal;
     letter-spacing: 4px;
     margin: 0;
-    background-color:   rgba(44, 49, 41, .9);
 }
 
 .ToDo h1, .Done h1 {
@@ -33,6 +48,7 @@
     display: flex;
     flex-direction: column;
     background-color: rgb(187, 36, 36);
+    border: 1px solid rgb(177, 199, 164);
     padding: 10px 0;
 }
 
@@ -48,6 +64,7 @@
     transition: .5s;
     margin-top: 5px;
     letter-spacing: 2px;
+    border: 1px solid rgb(177, 199, 164);
     transition: .5s;
 }
 

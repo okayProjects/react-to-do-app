@@ -3,5 +3,6 @@
   background-image: url('./assets/bgc.jpg');
   background-size: contain;
   background-position: center;
-  /* background-repeat: no-repeat; */
+  background-attachment: fixed;
+  /* min-height: 100vh; */
 }
