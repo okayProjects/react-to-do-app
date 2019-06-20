@@ -8,19 +8,19 @@ self.__precacheManifest = [
     "url": "/react-to-do-app/static/js/runtime~main.a1e7f5d3.js"
   },
   {
-    "revision": "126df83ec087572accb8",
-    "url": "/react-to-do-app/static/js/main.126df83e.chunk.js"
+    "revision": "0d3f8de817c019673851",
+    "url": "/react-to-do-app/static/js/main.0d3f8de8.chunk.js"
   },
   {
     "revision": "aa76bed7b365cc18454a",
     "url": "/react-to-do-app/static/js/2.aa76bed7.chunk.js"
   },
   {
-    "revision": "126df83ec087572accb8",
-    "url": "/react-to-do-app/static/css/main.0ee1083f.chunk.css"
+    "revision": "0d3f8de817c019673851",
+    "url": "/react-to-do-app/static/css/main.f16bfd0a.chunk.css"
   },
   {
-    "revision": "c9f1384f5948934f4693998ec056c44c",
+    "revision": "544739d68917be2fdd2ec7418785d038",
     "url": "/react-to-do-app/index.html"
   }
 ];
